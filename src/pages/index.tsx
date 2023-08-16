@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Button, Page, Avatar, Box, useNavigate } from 'zmp-ui';
+import { Button, Page, Box, useNavigate } from 'zmp-ui';
 import { getUserInfo } from "zmp-sdk/apis";
-import UserAvatar from "../components/userAvatar";
+import { Avatar } from "@/components/common/avatar";
 import { Footer } from "@/components/common/footer";
 import { Header } from "@/components/common/header";
 
@@ -41,7 +41,7 @@ const HomePage: React.FunctionComponent = () => {
       <Header title="Zalo Mini App" />
 
       <div className="page-content">
-        <UserAvatar userInfo={userInfo} />
+        <Avatar userInfo={userInfo} />
       </div>
       <Footer />
     </Page>

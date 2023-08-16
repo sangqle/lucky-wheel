@@ -8,7 +8,7 @@ import 'zmp-ui/zaui.css';
 import './css/app.css';
 
 // Import App Component
-import App from './components/app';
+import App from './app';
 import appConfig from '../app-config.json';
 
 if (!window.APP_CONFIG) {
