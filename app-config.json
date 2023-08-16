@@ -2,12 +2,18 @@
   "app": {
     "title": "Lucky wheel",
     "headerTitle": "Lucky wheel",
-    "headerColor": "#1843EF",
-    "textColor": "white",
+    "headerColor": {
+      "light": "#ffffff",
+      "dark": "#000000"
+    },
+    "textColor": {
+      "light": "black",
+      "dark": "white"
+    },
     "statusBarColor": "#1843EF",
     "leftButton": "back",
     "statusBar": "normal",
-    "actionBarHidden": false,
+    "actionBarHidden": true,
     "hideAndroidBottomNavigationBar": false,
     "hideIOSSafeAreaBottom": false
   },

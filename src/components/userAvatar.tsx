@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Box, Text } from "zmp-ui";
 
-const UserAvatar = ({ userInfo }) => {
+const userAvatar = ({ userInfo }) => {
   return (
     <div className="flex items-center">
       <Avatar src={userInfo?.avatar} size={48} />
@@ -13,4 +13,4 @@ const UserAvatar = ({ userInfo }) => {
   );
 };
 
-export default UserAvatar;
+export default userAvatar;
