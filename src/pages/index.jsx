@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  List,
-  Page,
-  Icon,
-  useNavigate
-} from 'zmp-ui';
-import { useRecoilValue } from 'recoil';
 import { getUserInfo } from 'zmp-sdk/apis';
-import { userState } from '../state';
+import { Page } from 'zmp-ui'; // Import the Page component
 
 import UserCard from '../components/user-card';
 
 const HomePage = () => {
-  const [userInfo, setUserInfo] = useState(null);
-
+  const [userInfo] = useState(null);
   useEffect(() => {
     // Move the API call inside the useEffect hook
     getUserInfo({
@@ -23,10 +15,9 @@ const HomePage = () => {
       },
       fail: (error) => {
         console.log(error);
-      }
+      },
     });
   }, []); // Empty dependency array ensures the effect runs once on component mount
-
   return (
     <Page className="page">
       <div className="section-container">
@@ -35,6 +26,6 @@ const HomePage = () => {
       </div>
     </Page>
   );
-}
+};
 
 export default HomePage;

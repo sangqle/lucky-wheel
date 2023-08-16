@@ -1,19 +1,19 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const userState = atom({
-  key: "user",
+  key: 'user',
   default: {
     id: '12345678',
     name: 'Test user 1',
     avatar: 'ZA',
-    email: 'abc@gmail.com'
-  }
-})
+    email: 'abc@gmail.com',
+  },
+});
 
 export const getAppInfo = atom({
-  key: "appInfo",
+  key: 'appInfo',
   default: {
     name: 'Recoil',
-    version: '1.0.0'
-  }
-})
+    version: '1.0.0',
+  },
+});

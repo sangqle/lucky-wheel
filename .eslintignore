@@ -1,0 +1,9 @@
+.idea
+.vscode
+node_modules
+dist
+www
+build
+
+*.config.js
+zqr_lib.js
