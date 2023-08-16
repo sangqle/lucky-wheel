@@ -1,17 +1,17 @@
 {
-  "cwd": "/Users/sanglq3/Cabin/nodejs/lucky-wheel",
+  "cwd": "/home/cpu13172/ZTE/nodejs-playground/lucky-wheel",
   "newProject": true,
-  "name": "Clucky Wheel",
+  "name": "Lucky wheel",
   "package": "zmp-ui",
-  "framework": "react",
-  "cssPreProcessor": "less",
-  "template": "single-view",
-  "includeTailwind": true,
+  "framework": "react-typescript",
+  "cssPreProcessor": false,
+  "template": "blank",
   "theming": {
     "color": "#007aff",
     "darkTheme": false,
     "fillBars": false
   },
   "customBuild": false,
+  "includeTailwind": false,
   "stateManagement": "recoil"
 }

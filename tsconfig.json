@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "target": "es2015", 
+    "target": "es6", 
     "module": "esnext", 
     "noImplicitAny": false,
     "preserveConstEnums": true,
-    "jsx": "react-jsx", 
+    "jsx": "react", 
     "lib": ["dom", "es5", "es6", "es7", "es2017"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -26,12 +26,7 @@
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "resolveJsonModule": true,
-
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"],
   "include": ["src"]

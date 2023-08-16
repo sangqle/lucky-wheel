@@ -1,22 +1,15 @@
 {
   "app": {
-    "title": "Clucky Wheel",
-    "headerTitle": "Clucky Wheel",
+    "title": "Lucky wheel",
+    "headerTitle": "Lucky wheel",
     "headerColor": "#1843EF",
     "textColor": "white",
+    "statusBarColor": "#1843EF",
     "leftButton": "back",
     "statusBar": "normal",
     "actionBarHidden": false,
     "hideAndroidBottomNavigationBar": false,
     "hideIOSSafeAreaBottom": false
-  },
-  "textColor": {
-    "light": "black",
-    "dark": "white"
-  },
-  "headerTitle": {
-    "en": "Clucky Wheel",
-    "vi": "Bánh xe may mắn"
   },
   "debug": false,
   "listCSS": [],
