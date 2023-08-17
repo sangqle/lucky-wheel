@@ -5,22 +5,48 @@ import { RecoilRoot } from 'recoil';
 import HomePage from './pages';
 import About from './pages/About';
 import Discover from './pages/Discover';
-import History from './pages/History';
-import Layout from './components/common/layout';
-
-
+import History from "@/pages/History";
+import Layout from "@/components/layout";
 
 const MyApp = () => {
   return (
     <RecoilRoot>
-      <App >
+      <App>
         <SnackbarProvider>
           <ZMPRouter>
             <AnimationRoutes>
-              <Route path="/" element={<Layout><HomePage /></Layout>}></Route>
-              <Route path="/about" element={<Layout><About /></Layout>}></Route>
-              <Route path="/discover" element={<Layout><Discover /></Layout>}></Route>
-              <Route path="/history" element={<Layout><History /></Layout>}></Route>
+              <Route
+                path="/"
+                element={
+                  <Layout>
+                    <HomePage />
+                  </Layout>
+                }
+              ></Route>
+              <Route
+                path="/about"
+                element={
+                  <Layout>
+                    <About />
+                  </Layout>
+                }
+              ></Route>
+              <Route
+                path="/discover"
+                element={
+                  <Layout>
+                    <Discover />
+                  </Layout>
+                }
+              ></Route>
+              <Route
+                path="/history"
+                element={
+                  <Layout>
+                    <History />
+                  </Layout>
+                }
+              ></Route>
             </AnimationRoutes>
           </ZMPRouter>
         </SnackbarProvider>

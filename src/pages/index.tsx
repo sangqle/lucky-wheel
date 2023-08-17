@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Page, Box, useNavigate, Input } from 'zmp-ui';
-import { getUserInfo } from "zmp-sdk/apis";
-import { Avatar } from "@/components/common/avatar";
-import { Footer } from "@/components/common/footer";
-import { Header } from "@/components/common/header";
-
+import { getUserInfo } from 'zmp-sdk/apis';
+import { Navigation } from '@/components/navigation';
 interface UserInfo {
   id: string;
   name: string;
@@ -38,15 +35,15 @@ const HomePage: React.FunctionComponent = () => {
   const navigate = useNavigate();
 
   return (
-    <Container >
+    <Container>
       <Box>
         <p>Content here</p>
       </Box>
+      <Navigation />
     </Container>
   );
 };
 
-const Container = styled.div`
-`;
+const Container = styled.div``;
 
 export default HomePage;
