@@ -13,11 +13,6 @@ const tabs: Record<string, MenuItem> = {
     label: 'Thông báo',
     icon: <Icon icon="zi-notif" />,
   },
-  '/cart': {
-    label: 'Giỏ hàng',
-    icon: <CartIcon />,
-    activeIcon: <CartIcon active />,
-  },
   '/profile': {
     label: 'Cá nhân',
     icon: <Icon icon="zi-user" />,

@@ -4,6 +4,7 @@ import styled from 'styled-components'; // Import styled-components
 import { Route, Routes } from 'react-router-dom';
 import HomePage from '@/pages';
 import { ProfilePage } from '@/pages/Profile';
+import NotificationPage from '@/pages/Notification';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -22,8 +23,7 @@ export const Layout = () => {
       <Flex1Container>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
-          <Route path="/notification" element={<ProfilePage />}></Route>
-          <Route path="/cart" element={<ProfilePage />}></Route>
+          <Route path="/notification" element={<NotificationPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
         </Routes>
       </Flex1Container>
