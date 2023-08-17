@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Page, Box, useNavigate, Input } from 'zmp-ui';
 import { getUserInfo } from 'zmp-sdk/apis';
+import LuckyWheel from '@/components/lucky-wheel';
 
 interface UserInfo {
   id: string;
@@ -36,7 +37,9 @@ const HomePage: React.FunctionComponent = () => {
 
   return (
     <Container>
-      <Content>Home page Home page Home page Home page Home page Home page Home page</Content>
+      <Content>
+        <LuckyWheel />
+      </Content>
     </Container>
   );
 };
