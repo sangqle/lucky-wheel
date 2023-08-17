@@ -8,5 +8,6 @@ type HeaderProps = {
 };
 
 export function Header(props: HeaderProps) {
-    return (<BaseHeader />);
+    const { title } = props;
+    return (<BaseHeader title={title} />);
 }

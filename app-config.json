@@ -13,7 +13,7 @@
     "statusBarColor": "#1843EF",
     "leftButton": "back",
     "statusBar": "normal",
-    "actionBarHidden": true,
+    "actionBarHidden": false,
     "hideAndroidBottomNavigationBar": false,
     "hideIOSSafeAreaBottom": false
   },

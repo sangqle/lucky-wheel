@@ -1,47 +1,47 @@
 import React, { useState } from "react";
-import { BottomNavigation, Icon, Page } from "zmp-ui";
+import styled from "styled-components";
+import { BottomNavigation, Icon, useNavigate } from "zmp-ui";
 
-export function Footer(props) {
-    const [activeTab, setActiveTab] = useState("chat");
-    const { title } = props;
+const FooterContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+`;
+
+export function Footer() {
+    const [activeTab, setActiveTab] = useState("timeline");
+    const navigate = useNavigate();
+
+    const handleTabChange = (tabKey, route) => {
+        setActiveTab(tabKey);
+        navigate(route);
+    };
+
     return (
-        <Page className="page">
-            <BottomNavigation
-                fixed
-                activeKey={activeTab}
-                onChange={(key) => setActiveTab(key)}
-            >
+        <FooterContainer>
+            <BottomNavigation fixed activeKey={activeTab}>
                 <BottomNavigation.Item
-                    key="chat"
-                    label="Tin Nhắn"
-                    icon={<Icon icon="zi-chat" />}
-                    activeIcon={<Icon icon="zi-chat-solid" />}
-                />
-                <BottomNavigation.Item
-                    label="Danh bạ"
-                    key="contact"
-                    icon={<Icon icon="zi-call" />}
-                    activeIcon={<Icon icon="zi-call-solid" />}
+                    key="timeline"
+                    label="Lịch sử"
+                    icon={<Icon icon="zi-clock-1" />}
+                    activeIcon={<Icon icon="zi-clock-1-solid" />}
+                    onClick={() => handleTabChange("timeline", "/history")}
                 />
                 <BottomNavigation.Item
                     label="Khám phá"
                     key="discovery"
                     icon={<Icon icon="zi-more-grid" />}
                     activeIcon={<Icon icon="zi-more-grid-solid" />}
-                />
-                <BottomNavigation.Item
-                    key="timeline"
-                    label="Nhật ký"
-                    icon={<Icon icon="zi-clock-1" />}
-                    activeIcon={<Icon icon="zi-clock-1-solid" />}
+                    onClick={() => handleTabChange("discovery", "/discover")}
                 />
                 <BottomNavigation.Item
                     key="me"
                     label="Cá nhân"
                     icon={<Icon icon="zi-user" />}
                     activeIcon={<Icon icon="zi-user-solid" />}
+                    onClick={() => handleTabChange("me", "/about")}
                 />
             </BottomNavigation>
-        </Page>
+        </FooterContainer>
     );
-};
+}
