@@ -1,12 +1,33 @@
 import React from 'react';
-import { Navigation } from "@/components/navigation";
-const Layout = ({ children }) => {
+import { Navigation } from '@/components/navigation';
+import styled from 'styled-components'; // Import styled-components
+import { Route, Routes } from 'react-router-dom';
+import HomePage from '@/pages';
+import { ProfilePage } from '@/pages/Profile';
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Use the full viewport height */
+`;
+
+const Flex1Container = styled.div`
+  flex: 1;
+  overflow: hidden;
+`;
+
+export const Layout = () => {
   return (
-    <div className="layout">
-      <div className="content">{children}</div>
+    <FlexContainer>
+      <Flex1Container>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/notification" element={<ProfilePage />}></Route>
+          <Route path="/cart" element={<ProfilePage />}></Route>
+          <Route path="/profile" element={<ProfilePage />}></Route>
+        </Routes>
+      </Flex1Container>
       <Navigation />
-    </div>
+    </FlexContainer>
   );
 };
-
-export default Layout;

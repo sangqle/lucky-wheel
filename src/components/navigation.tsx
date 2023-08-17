@@ -1,35 +1,35 @@
-import React, { FC, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
-import { MenuItem } from "@/types/menu";
-import { BottomNavigation, Icon } from "zmp-ui";
-import { CartIcon } from "@/components/cart-icon";
+import React, { FC, useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { MenuItem } from '@/types/menu';
+import { BottomNavigation, Icon } from 'zmp-ui';
+import { CartIcon } from '@/components/cart-icon';
 
 const tabs: Record<string, MenuItem> = {
-  "/": {
-    label: "Trang chủ",
+  '/': {
+    label: 'Trang chủ',
     icon: <Icon icon="zi-home" />,
   },
-  "/notification": {
-    label: "Thông báo",
+  '/notification': {
+    label: 'Thông báo',
     icon: <Icon icon="zi-notif" />,
   },
-  "/cart": {
-    label: "Giỏ hàng",
+  '/cart': {
+    label: 'Giỏ hàng',
     icon: <CartIcon />,
     activeIcon: <CartIcon active />,
   },
-  "/profile": {
-    label: "Cá nhân",
+  '/profile': {
+    label: 'Cá nhân',
     icon: <Icon icon="zi-user" />,
   },
 };
 
 export type TabKeys = keyof typeof tabs;
 
-export const NO_BOTTOM_NAVIGATION_PAGES = ["/search", "/category"];
+export const NO_BOTTOM_NAVIGATION_PAGES = ['/search', '/category'];
 
 export const Navigation: FC = () => {
-  const [activeTab, setActiveTab] = useState<TabKeys>("/");
+  const [activeTab, setActiveTab] = useState<TabKeys>('/');
   const navigate = useNavigate();
   const location = useLocation();
 

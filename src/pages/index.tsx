@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button, Page, Box, useNavigate, Input } from 'zmp-ui';
 import { getUserInfo } from 'zmp-sdk/apis';
-import { Navigation } from '@/components/navigation';
+
 interface UserInfo {
   id: string;
   name: string;
@@ -36,14 +36,22 @@ const HomePage: React.FunctionComponent = () => {
 
   return (
     <Container>
-      <Box>
-        <p>Content here</p>
-      </Box>
-      <Navigation />
+      <Content>Home page Home page Home page Home page Home page Home page Home page</Content>
     </Container>
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+`;
+
+const Content = styled.div`
+  flex: 1;
+  padding: 20px;
+  /* Additional styles for your content */
+`;
 
 export default HomePage;
