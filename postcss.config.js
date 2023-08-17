@@ -1,5 +1,9 @@
+const tailwindcss = require('tailwindcss');
+
 module.exports = {
-  plugins: {
-    'postcss-preset-env': {},
-  },
+  plugins: [
+    require('postcss-aspect-ratio-polyfill'),
+    tailwindcss('./tailwind.config.js'),
+    require('autoprefixer'),
+  ],
 };
