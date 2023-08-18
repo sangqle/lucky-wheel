@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import styled from 'styled-components';
 import useMeasure from 'react-use-measure';
-import styles from './styles.module.css';
+import { useGesture } from '@use-gesture/react';
 
 const OFFSET = Math.random();
 
@@ -16,6 +16,10 @@ const map = function (value, in_min, in_max, out_min, out_max) {
     return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 };
 
+
+const prizes = ['Prize 1', 'Prize 2', 'Prize 3', 'Prize 4', 'Prize 5', 'Prize 6', 'Prize 7', 'Prize 8', 'Prize 9', 'Prize 10', 'Prize 11', 'Prize 12'];
+
+
 function Wheel() {
     const r = 200;
     const cx = 250;
@@ -24,6 +28,14 @@ function Wheel() {
     const [acc, setAcc] = useState(0);
     const config = { mass: 50, tension: 200, friction: 200, precision: 0.001 };
     const [props, set] = useSpring(() => ({ transform: 'rotate(0deg)', immediate: false }));
+
+    const bind = useGesture({
+        onWheel: ({ offset: [, y] }) => {
+            set({ transform: `rotate(${map(y, -300, 300, 0, 700)}deg)`, immediate: false, config });
+            setAcc(map(y, -300, 300, 0, 700));
+        },
+    });
+
 
     useEffect(() => {
         set({
@@ -45,16 +57,16 @@ function Wheel() {
             items.push(<Fragment key={i}>
                 <line
                     stroke='rgb(255,0,0)'
-                    strokeWidth='2'
+                    strokeWidth='1'
                     x1={cx + xLength}
                     y1={cy + yLength}
                     x2={cx}
                     y2={cy}
                 />
                 <text
-                    x={cx + txLength}
-                    y={cy + tyLength}
-                    fontSize="15px"
+                    x={cx + txLength + 60}
+                    y={cy + tyLength + 5}
+                    fontSize="20px"
                     transform={`rotate(${((i + 0.5) / numOfItems + OFFSET) * 360} 
                   ${cx + txLength},
                   ${cy + tyLength})`}
@@ -64,19 +76,24 @@ function Wheel() {
         return items;
     };
 
+    const calculatePrize = (degrees) => {
+        // Calculate the index of the prize based on the degrees
+        const index = Math.floor((degrees + 30) % 360 / 30);
+        return prizes[index];
+    };
+
     return (
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"
                 style={{ width: "100vw", height: "80vh" }}>
-                <g fill="white" stroke="green" strokeWidth="10">
+                <g fill="white" stroke="green" strokeWidth="5">
                     <circle cx="250" cy="250" r={r} />
                 </g>
                 <animated.g style={{
                     transform: props.transform,
                     transformOrigin: "center"
                 }} >
-                    {rederItems(12)}
-
+                    {rederItems(40)}
                 </animated.g>
                 <g fill="#61DAFB">
                     <circle cx="250" cy="250" r="15" />
@@ -89,16 +106,22 @@ function Wheel() {
                 </g>
             </svg>
             <PressButton setPower={setPower} />
-        </div>
+        </div >
     );
 }
 
-const StyledButton = styled.button`
-    width: 100px;
-    height: auto;
-    background: hotpink;
-`;
 
+
+const StyledButton = styled.button`
+        width: 80%;
+        height: 50px;
+        background: hotpink;
+    `;
+
+const Container = styled.div`
+        display: flex;
+        justify-content: center;
+    `;
 
 const PressButton = ({ setPower }) => {
     const [pressed, setPressed] = useState(false);
@@ -119,8 +142,8 @@ const PressButton = ({ setPower }) => {
             });
         else {
             setWidth(parseInt(props.width.get()));
-            setPower(width * 5);
-            console.log(`power: ${width * 5}`);
+            setPower(width * 4);
+            console.log(`power: ${width * 4}`);
             set({ to: { width: '0%', backgroundColor: 'hotpink' }, immediate: true });
         }
     }, [pressed, setPower]);
@@ -136,18 +159,19 @@ const PressButton = ({ setPower }) => {
     };
 
     return (
-        <StyledButton
-            className="power-button"
-            onMouseDown={() => handlePressButton(true)}
-            onMouseUp={() => handlePressButton(false)}
-            onTouchStart={() => handlePressButton(true)}
-            onTouchEnd={() => handlePressButton(false)}
-        >
-            <animated.div className="content">{interpolatedWidth}</animated.div>
-        </StyledButton>
+        <Container>
+            <StyledButton
+                className="power-button"
+                onMouseDown={() => handlePressButton(true)}
+                onMouseUp={() => handlePressButton(false)}
+                onTouchStart={() => handlePressButton(true)}
+                onTouchEnd={() => handlePressButton(false)}
+            >
+                <animated.div className="loading">{interpolatedWidth}</animated.div>
+            </StyledButton>
+        </Container >
+
     );
-
-
 };
 
-export default Wheel;;;;
+export default Wheel;
