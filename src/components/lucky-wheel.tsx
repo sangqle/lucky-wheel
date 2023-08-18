@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import styled from 'styled-components';
 import useMeasure from 'react-use-measure';
@@ -21,9 +21,18 @@ const prizes = ['Prize 1', 'Prize 2', 'Prize 3', 'Prize 4', 'Prize 5', 'Prize 6'
 
 
 function Wheel() {
-    const r = 200;
-    const cx = 250;
-    const cy = 250;
+    const parentRef = useRef(null); // Create a reference to the parent container
+    const [parentWidth, setParentWidth] = useState(0); // Initialize parentWidth state
+
+    useEffect(() => {
+        if (parentRef.current) {
+            setParentWidth(parentRef.current.clientWidth); // Get the parent container's width
+        }
+    }, []);
+
+    const circleRadius = parentWidth * 0.5; // Calculate 50% of the parent container's width
+    const cx = circleRadius;
+    const cy = circleRadius;
     const [power, setPower] = useState(0);
     const [acc, setAcc] = useState(0);
     const config = { mass: 50, tension: 200, friction: 200, precision: 0.001 };
@@ -36,7 +45,6 @@ function Wheel() {
         },
     });
 
-
     useEffect(() => {
         set({
             from: { transform: `rotate(${map(acc, 0, 100, 0, 700)}deg)` },
@@ -47,31 +55,38 @@ function Wheel() {
         setAcc(acc + power);
     }, [power]);
 
-    const rederItems = (numOfItems) => {
+
+
+
+    const renderItems = (numOfItems) => {
         let items: JSX.Element[] = [];
         for (let i = 0; i < numOfItems; i++) {
-            let xLength = Math.cos(2 * Math.PI * (i / numOfItems + OFFSET)) * (r - 5);
-            let yLength = Math.sin(2 * Math.PI * (i / numOfItems + OFFSET)) * (r - 5);
-            let txLength = Math.cos(2 * Math.PI * ((i + 0.5) / numOfItems + OFFSET)) * (r / 2);
-            let tyLength = Math.sin(2 * Math.PI * ((i + 0.5) / numOfItems + OFFSET)) * (r / 2);
-            items.push(<Fragment key={i}>
-                <line
-                    stroke='rgb(255,0,0)'
-                    strokeWidth='1'
-                    x1={cx + xLength}
-                    y1={cy + yLength}
-                    x2={cx}
-                    y2={cy}
-                />
-                <text
-                    x={cx + txLength + 60}
-                    y={cy + tyLength + 5}
-                    fontSize="20px"
-                    transform={`rotate(${((i + 0.5) / numOfItems + OFFSET) * 360} 
-                  ${cx + txLength},
-                  ${cy + tyLength})`}
-                >{i}</text>
-            </Fragment>);
+            let xLength = Math.cos(2 * Math.PI * (i / numOfItems + OFFSET)) * (circleRadius - 5);
+            let yLength = Math.sin(2 * Math.PI * (i / numOfItems + OFFSET)) * (circleRadius - 5);
+            let txLength = Math.cos(2 * Math.PI * ((i + 0.5) / numOfItems + OFFSET)) * (circleRadius / 2);
+            let tyLength = Math.sin(2 * Math.PI * ((i + 0.5) / numOfItems + OFFSET)) * (circleRadius / 2);
+            let xRate = 60;
+            let yRate = 5;
+            items.push(
+                <Fragment key={i}>
+                    <line
+                        stroke='rgb(255,0,0)'
+                        strokeWidth='1'
+                        x1={cx + xLength}
+                        y1={cy + yLength}
+                        x2={cx}
+                        y2={cy}
+                    />
+                    <text
+                        x={cx + txLength + xRate}
+                        y={cy + tyLength + yRate}
+                        fontSize="20px"
+                        transform={`rotate(${((i + 0.5) / numOfItems + OFFSET) * 360} 
+                          ${cx + txLength},
+                          ${cy + tyLength})`}
+                    >{i}</text>
+                </Fragment>
+            );
         }
         return items;
     };
@@ -83,32 +98,33 @@ function Wheel() {
     };
 
     return (
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"
-                style={{ width: "100vw", height: "80vh" }}>
+        <div ref={parentRef}> {/* Attach the ref to the parent container */}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${parentWidth} ${parentWidth}`} {...bind()}
+                style={{ width: "90vw", height: "80vh" }}>
                 <g fill="white" stroke="green" strokeWidth="5">
-                    <circle cx="250" cy="250" r={r} />
+                    <circle cx={circleRadius} cy={circleRadius} r={circleRadius} />
                 </g>
                 <animated.g style={{
                     transform: props.transform,
-                    transformOrigin: "center"
+                    transformOrigin: `${circleRadius}px ${circleRadius}px`
                 }} >
-                    {rederItems(40)}
+                    {renderItems(10)}
                 </animated.g>
                 <g fill="#61DAFB">
-                    <circle cx="250" cy="250" r="15" />
+                    <circle cx={circleRadius} cy={circleRadius} r="15" />
                 </g>
                 <g fill="black">
-                    <circle cx="250" cy="250" r="5" />
+                    <circle cx={circleRadius} cy={circleRadius} r="5" />
                 </g>
                 <g fill="lime" stroke="purple" strokeWidth="2">
-                    <polygon points="250,70 230,30 270,30" />
+                    <polygon points={`${circleRadius},70 ${circleRadius - 20},30 ${circleRadius + 20},30`} />
                 </g>
             </svg>
             <PressButton setPower={setPower} />
-        </div >
+        </div>
     );
 }
+
 
 
 
