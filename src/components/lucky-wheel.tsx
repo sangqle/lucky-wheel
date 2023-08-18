@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 import styled from 'styled-components';
+import useMeasure from 'react-use-measure';
+import styles from './styles.module.css';
 
 const OFFSET = Math.random();
 
@@ -113,19 +115,19 @@ const PressButton = ({ setPower }) => {
         if (pressed)
             set({
                 from: { width: '0%', backgroundColor: "green" },
-                to: { width: '100%', backgroundColor: "red" },
-                config: { duration: 2000 }
+                to: { width: '100%', backgroundColor: "red" }, immediate: false, config: { duration: 3000 }
             });
         else {
-            console.log('width power: ', width);
-            setPower(width);
+            setWidth(parseInt(props.width.get()));
+            setPower(width * 5);
+            console.log(`power: ${width * 5}`);
             set({ to: { width: '0%', backgroundColor: 'hotpink' }, immediate: true });
         }
-    }, [pressed, width, setPower]);
+    }, [pressed, setPower]);
 
 
-    const interpolatedWidth = props.width.interpolate(x => {
-        setWidth(parseInt(x)); // Update the width state here
+    const interpolatedWidth = props.width.to(x => {
+        // console.log(x);
         return x === '0%' ? "Press me!" : parseInt(x) + '%';
     });
 
@@ -148,4 +150,4 @@ const PressButton = ({ setPower }) => {
 
 };
 
-export default Wheel;
+export default Wheel;;;;
