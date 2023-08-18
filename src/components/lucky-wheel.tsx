@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useSpring, animated, useTransition } from 'react-spring';
-import { useDrag } from '@use-gesture/react';
+import { useSpring, animated } from '@react-spring/web';
+import styled from 'styled-components';
 
 const OFFSET = Math.random();
 
@@ -26,7 +26,9 @@ function Wheel() {
     useEffect(() => {
         set({
             from: { transform: `rotate(${map(acc, 0, 100, 0, 700)}deg)` },
-            transform: `rotate(${map(acc + power, 0, 100, 0, 700)}deg)`, immediate: false, config
+            transform: `rotate(${map(acc + power, 0, 100, 0, 700)}deg)`,
+            immediate: false,
+            config
         });
         setAcc(acc + power);
     }, [power]);
@@ -84,42 +86,66 @@ function Wheel() {
                     <polygon points="250,70 230,30 270,30" />
                 </g>
             </svg>
-            {/* <PressButton setPower={setPower} style={{ height: "20vh" }} /> */}
+            <PressButton setPower={setPower} />
         </div>
     );
 }
 
-// const PressButton = ({ setPower }) => {
-//     const [pressed, toggle] = useState(false);
-//     const [width, setWidth] = useState(0);
-//     const [props, set] = useSpring(() => ({ width: '0%', backgroundColor: 'hotpink' }));
-//     useEffect(() => {
-//         if (pressed)
-//             set({
-//                 from: { width: '0%', backgroundColor: 'hotpink' },
-//                 to: { width: '100%', backgroundColor: "red" }, immediate: false, config: { duration: 2000 }
-//             });
-//         else {
-//             setPower(width);
-//             set({ to: { width: '0%', backgroundColor: 'hotpink' }, immediate: true });
-//         }
-//     }, [pressed, width]);
+const StyledButton = styled.button`
+    width: 100px;
+    height: auto;
+    background: hotpink;
+`;
 
-//     return <button className="main"
-//         onMouseDown={() => { toggle(!pressed); }}
-//         onMouseUp={() => { toggle(!pressed); }}
-//         onTouchStart={() => { toggle(!pressed); }}
-//         onTouchEnd={() => { toggle(!pressed); }}
-//     >
-//         <animated.div className="fill" style={{
-//             width: props.width,
-//             background: props.backgroundColor
-//         }} />
-//         <animated.div className="content">{props.width.interpolate(x => {
-//             setWidth(parseInt(x));
-//             return x === '0%' ? "Press me!" : parseInt(x) + '%';
-//         })}</animated.div>
-//     </button>;
-// };
+
+const PressButton = ({ setPower }) => {
+    const [pressed, setPressed] = useState(false);
+    const [width, setWidth] = useState(0); // Initialize width state here
+
+    const [props, set] = useSpring(() => ({
+        from: { width: '0%', backgroundColor: 'hotpink' },
+        width: pressed ? '100%' : '0%',
+        backgroundColor: pressed ? 'red' : 'hotpink',
+        immediate: pressed
+    }));
+
+    useEffect(() => {
+        if (pressed)
+            set({
+                from: { width: '0%', backgroundColor: "green" },
+                to: { width: '100%', backgroundColor: "red" },
+                config: { duration: 2000 }
+            });
+        else {
+            console.log('width power: ', width);
+            setPower(width);
+            set({ to: { width: '0%', backgroundColor: 'hotpink' }, immediate: true });
+        }
+    }, [pressed, width, setPower]);
+
+
+    const interpolatedWidth = props.width.interpolate(x => {
+        setWidth(parseInt(x)); // Update the width state here
+        return x === '0%' ? "Press me!" : parseInt(x) + '%';
+    });
+
+    const handlePressButton = (pressed) => {
+        setPressed(pressed);
+    };
+
+    return (
+        <StyledButton
+            className="power-button"
+            onMouseDown={() => handlePressButton(true)}
+            onMouseUp={() => handlePressButton(false)}
+            onTouchStart={() => handlePressButton(true)}
+            onTouchEnd={() => handlePressButton(false)}
+        >
+            <animated.div className="content">{interpolatedWidth}</animated.div>
+        </StyledButton>
+    );
+
+
+};
 
 export default Wheel;

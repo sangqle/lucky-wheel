@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button, Page, Box, useNavigate, Input } from 'zmp-ui';
 import { getUserInfo } from 'zmp-sdk/apis';
 import LuckyWheel from '@/components/lucky-wheel';
+import DemoSpring from '@/components/demo-spring';
 
 interface UserInfo {
   id: string;
@@ -39,6 +40,7 @@ const HomePage: React.FunctionComponent = () => {
     <Container>
       <Content>
         <LuckyWheel />
+        {/* <DemoSpring /> */}
       </Content>
     </Container>
   );
