@@ -23,6 +23,7 @@ const prizes = ['Prize 1', 'Prize 2', 'Prize 3', 'Prize 4', 'Prize 5', 'Prize 6'
 function Wheel() {
     const parentRef = useRef(null); // Create a reference to the parent container
     const [parentWidth, setParentWidth] = useState(0); // Initialize parentWidth state
+    const [cell, setCell] = useState(10); // Initialize parentWidth state
 
     useEffect(() => {
         if (parentRef.current) {
@@ -108,7 +109,7 @@ function Wheel() {
                     transform: props.transform,
                     transformOrigin: `${circleRadius}px ${circleRadius}px`
                 }} >
-                    {renderItems(40)}
+                    {renderItems(cell)}
                 </animated.g>
                 <g fill="#61DAFB">
                     <circle cx={circleRadius} cy={circleRadius} r="15" />
@@ -120,11 +121,42 @@ function Wheel() {
                     <polygon points={`${circleRadius},10 ${circleRadius - 20}, -30 ${circleRadius + 20},-30`} />
                 </g>
             </svg>
+            <InputCell onCellValueChange={setCell} />
             <PressButton setPower={setPower} />
         </div >
     );
 }
 
+
+const StyledInputCell = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    `;
+
+
+const InputCell = ({ onCellValueChange }) => {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (event) => {
+        const newValue = event.target.value;
+        setInputValue(newValue);
+        // Call the provided callback function to update the value in the parent component
+        onCellValueChange(newValue);
+        console.log(inputValue);
+    };
+
+    return (
+        <StyledInputCell>
+            <input placeholder='N.Cells'
+                value={inputValue}
+                onChange={handleInputChange}
+                style={{ border: '1px solid black', height: '60%' }}
+            />
+        </StyledInputCell>
+    );
+};
 
 
 
