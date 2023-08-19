@@ -31,7 +31,7 @@ function Wheel() {
         }
     }, []);
 
-    const circleRadius = parentWidth * 0.5; // Calculate 50% of the parent container's width
+    const circleRadius = parentWidth * 0.5;
     const cx = circleRadius;
     const cy = circleRadius;
     const [power, setPower] = useState(0);
@@ -100,27 +100,29 @@ function Wheel() {
 
     return (
         <div ref={parentRef}> {/* Attach the ref to the parent container */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${parentWidth} ${parentWidth}`} {...bind()}
-                style={{ width: "90vw", height: "80vh" }}>
-                <g fill="white" stroke="green" strokeWidth="5">
-                    <circle cx={circleRadius} cy={circleRadius} r={circleRadius} />
-                </g>
-                <animated.g style={{
-                    transform: props.transform,
-                    transformOrigin: `${circleRadius}px ${circleRadius}px`
-                }} >
-                    {renderItems(cell)}
-                </animated.g>
-                <g fill="#61DAFB">
-                    <circle cx={circleRadius} cy={circleRadius} r="15" />
-                </g>
-                <g fill="black">
-                    <circle cx={circleRadius} cy={circleRadius} r="5" />
-                </g>
-                <g fill="lime" stroke="purple" strokeWidth="2">
-                    <polygon points={`${circleRadius},10 ${circleRadius - 20}, -30 ${circleRadius + 20},-30`} />
-                </g>
-            </svg>
+            <div >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${parentWidth} ${parentWidth}`} {...bind()}
+                    style={{ width: "90vw", height: "80vh" }}>
+                    <g fill="white" stroke="green" strokeWidth="2">
+                        <circle cx={circleRadius} cy={circleRadius} r={circleRadius * 0.98} />
+                    </g>
+                    <animated.g style={{
+                        transform: props.transform,
+                        transformOrigin: `${circleRadius}px ${circleRadius}px`
+                    }} >
+                        {renderItems(cell)}
+                    </animated.g>
+                    <g fill="#61DAFB">
+                        <circle cx={circleRadius} cy={circleRadius} r="15" />
+                    </g>
+                    <g fill="black">
+                        <circle cx={circleRadius} cy={circleRadius} r="5" />
+                    </g>
+                    <g fill="lime" stroke="purple" strokeWidth="2">
+                        <polygon points={`${circleRadius},10 ${circleRadius - 20}, -30 ${circleRadius + 20},-30`} />
+                    </g>
+                </svg>
+            </div>
             <InputCell onCellValueChange={setCell} />
             <PressButton setPower={setPower} />
         </div >
