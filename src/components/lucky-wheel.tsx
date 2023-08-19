@@ -35,7 +35,7 @@ function Wheel() {
     const cy = circleRadius;
     const [power, setPower] = useState(0);
     const [acc, setAcc] = useState(0);
-    const config = { mass: 50, tension: 200, friction: 200, precision: 0.001 };
+    const config = { mass: 100, tension: 200, friction: 300, precision: 0.00001 };
     const [props, set] = useSpring(() => ({ transform: 'rotate(0deg)', immediate: false }));
 
     const bind = useGesture({
@@ -108,7 +108,7 @@ function Wheel() {
                     transform: props.transform,
                     transformOrigin: `${circleRadius}px ${circleRadius}px`
                 }} >
-                    {renderItems(10)}
+                    {renderItems(40)}
                 </animated.g>
                 <g fill="#61DAFB">
                     <circle cx={circleRadius} cy={circleRadius} r="15" />
@@ -117,11 +117,11 @@ function Wheel() {
                     <circle cx={circleRadius} cy={circleRadius} r="5" />
                 </g>
                 <g fill="lime" stroke="purple" strokeWidth="2">
-                    <polygon points={`${circleRadius},70 ${circleRadius - 20},30 ${circleRadius + 20},30`} />
+                    <polygon points={`${circleRadius},10 ${circleRadius - 20}, -30 ${circleRadius + 20},-30`} />
                 </g>
             </svg>
             <PressButton setPower={setPower} />
-        </div>
+        </div >
     );
 }
 
@@ -158,7 +158,7 @@ const PressButton = ({ setPower }) => {
             });
         else {
             setWidth(parseInt(props.width.get()));
-            setPower(width * 4);
+            setPower(width * 5);
             console.log(`power: ${width * 4}`);
             set({ to: { width: '0%', backgroundColor: 'hotpink' }, immediate: true });
         }
