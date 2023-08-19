@@ -54,7 +54,7 @@ function Wheel() {
             config
         });
         setAcc(acc + power);
-    }, [power, cell]);
+    }, [power, setCell]);
 
 
 
