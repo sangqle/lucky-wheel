@@ -1,6 +1,8 @@
 import { ListRenderer } from '@/components/list-renderer';
-import React, { FC } from 'react';
+import Constant from '@/utils/Constant';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
+import { openChat } from 'zmp-sdk';
 import { Page, Box, Avatar, Text, Icon } from 'zmp-ui';
 
 export const ProfilePage: React.FunctionComponent = () => {
@@ -59,6 +61,25 @@ export const ProfilePage: React.FunctionComponent = () => {
   };
 
   const Other: FC = () => {
+
+    const handleOpenChat = () => {
+      console.log('open chat');
+      const openChatScreen = async () => {
+        try {
+          console.log(`open chat with ${Constant.REACT_APP_CHAT_USER_ID}`);
+          const rs = await openChat({
+            type: "user",
+            id: Constant.REACT_APP_CHAT_USER_ID,
+            message: "Xin Chào",
+          });
+          console.log(rs);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      openChatScreen();
+    };
+
     return (
       <Box className="m-4">
         <ListRenderer
@@ -79,7 +100,9 @@ export const ProfilePage: React.FunctionComponent = () => {
               left: <Icon icon="zi-call" />,
               right: (
                 <Box flex>
-                  <Text.Header className="flex-1 items-center font-normal">
+                  <Text.Header className="flex-1 items-center font-normal"
+                    onClick={handleOpenChat}
+                  >
                     Liên hệ và góp ý
                   </Text.Header>
                   <Icon icon="zi-chevron-right" />
@@ -105,12 +128,13 @@ export const ProfilePage: React.FunctionComponent = () => {
 
 const Container = styled.div`
   padding: 20px;
-`;
+          `;
 
-// const RightContent = styled(Box)`
+// const RightContent = styled(Box)`;
 //   display: flex;
 //   flex-direction: row;
 //   align-items: center;
 //   justify-content: space-between;
 //   flex: 1;
+  // Add more variables as needed
 // `;
