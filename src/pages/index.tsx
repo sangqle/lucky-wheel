@@ -39,8 +39,7 @@ const HomePage: React.FunctionComponent = () => {
   return (
     <Container>
       <Content>
-        <LuckyWheel />
-        {/* <DemoSpring /> */}
+        <h1>Welcome to decalx</h1>
       </Content>
     </Container>
   );
