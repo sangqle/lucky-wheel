@@ -15,14 +15,14 @@
     "Samsung >= 5"
   ],
   "scripts": {
-    "start": "zmp start",
+    "build:prod": "vite build",
+    "start:dev": "zmp start",
     "deploy": "zmp deploy",
     "build:css": "postcss src/css/tailwind.css -o src/css/styles.css"
   },
   "dependencies": {
     "@react-spring/web": "^9.7.3",
     "@use-gesture/react": "^10.2.27",
-    "dotenv": "^16.3.1",
     "gsap": "^3.12.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
