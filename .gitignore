@@ -29,6 +29,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.*
 
 # Misc
 .DS_Store
@@ -36,3 +37,4 @@ Thumbs.db
 
 # Production build
 www/
+

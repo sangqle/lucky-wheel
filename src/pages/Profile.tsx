@@ -70,7 +70,7 @@ export const ProfilePage: React.FunctionComponent = () => {
           const rs = await openChat({
             type: "user",
             id: Constant.REACT_APP_CHAT_USER_ID,
-            message: "Xin Chào",
+            message: "Xin Chào, ",
           });
           console.log(rs);
         } catch (error) {
