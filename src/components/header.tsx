@@ -35,6 +35,7 @@ const HeaderContainer = styled.div`
   display: grid;
 	width: 100%;
   grid-template-columns: 10% 80% 10%;
+	align-items: center;
 `;
 
 export function Header(props: HeaderProps) {
@@ -50,7 +51,7 @@ export function Header(props: HeaderProps) {
 					/>
 				</HomeButton>
 				<LogoContainer>
-					<img src="/static/dexeta.png" alt="logo" style={{ width: '60px' }} />
+					<img src="/static/dexeta.png" alt="logo" style={{ height: '30px' }} />
 				</LogoContainer>
 			</HeaderContainer>
 		</StyledHeader>
