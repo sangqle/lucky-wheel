@@ -7,10 +7,8 @@ import { Button } from 'zmp-ui';
 
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
+  height: 100%;
+  overflow: auto;
 `;
 
 const Content = styled.div`
@@ -48,7 +46,7 @@ const HomePage: React.FunctionComponent = () => {
               title={item.title}
               description={item.description}
               image={item.image}
-              link={item.link}
+              time={item.time}
             />
           );
         })
