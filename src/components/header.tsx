@@ -15,7 +15,7 @@ const StyledHeader = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   justify-content: space-around;
-	width: 20%;
+	width: 100%;
 `;
 
 const HomeButton = styled.button`
@@ -33,6 +33,7 @@ const HeaderTitle = styled(Text.Title)`
 
 const HeaderContainer = styled.div`
   display: grid;
+	width: 100%;
   grid-template-columns: 10% 80% 10%;
 `;
 
@@ -49,7 +50,7 @@ export function Header(props: HeaderProps) {
 					/>
 				</HomeButton>
 				<LogoContainer>
-					<img src="/static/dexeta.png" alt="logo" />
+					<img src="/static/dexeta.png" alt="logo" style={{ width: '60px' }} />
 				</LogoContainer>
 			</HeaderContainer>
 		</StyledHeader>
