@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from '@/pages';
 import { ProfilePage } from '@/pages/Profile';
 import NotificationPage from '@/pages/Notification';
+import { Header } from './header';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -20,6 +21,7 @@ const Flex1Container = styled.div`
 export const Layout = () => {
   return (
     <FlexContainer>
+      <Header title={'Dexeta'} />
       <Flex1Container>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
