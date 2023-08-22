@@ -1,49 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Page, Box, useNavigate, Input } from 'zmp-ui';
-import { getUserInfo } from 'zmp-sdk/apis';
-import LuckyWheel from '@/components/lucky-wheel';
-import DemoSpring from '@/components/demo-spring';
+import RecommendService from '@/components/recommend-service';
+import RecommendationService from '@/state/redcommend-service';
+import { RecommendationItem } from '@/types/recommend-service-item';
+import { Button } from 'zmp-ui';
 
-interface UserInfo {
-  id: string;
-  name: string;
-  avatar: string;
-}
-
-const HomePage: React.FunctionComponent = () => {
-  const [userInfo, setUserInfo] = React.useState<UserInfo | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { userInfo } = await getUserInfo();
-        setUserInfo(userInfo);
-        console.log('data', userInfo);
-      } catch (error) {
-        // Handle API call failure
-        console.log(error);
-      }
-    };
-
-    fetchData();
-
-    // Clean up the subscription
-    return () => {
-      console.log('clean up');
-    };
-  }, []);
-
-  const navigate = useNavigate();
-
-  return (
-    <Container>
-      <Content>
-        <h1>Welcome to decalx</h1>
-      </Content>
-    </Container>
-  );
-};
 
 const Container = styled.div`
   display: flex;
@@ -57,5 +18,51 @@ const Content = styled.div`
   padding: 20px;
   /* Additional styles for your content */
 `;
+
+const HomePage: React.FunctionComponent = () => {
+
+  const [recommendServiceItems, setRecommendServiceItems] = useState<RecommendationItem[]>([]);
+  // const [visibleItemsCount, setVisibleItemsCount] = useState<number>(5); // Display 5 items initially
+  // const itemsPerPage = 5;
+
+
+  useEffect(() => {
+    const getRecommendationServiceItems = async () => {
+      try {
+        const response = await RecommendationService.getRecommendations();
+        const allItems = response.data;
+        console.log('Recommendation service items:', allItems);
+        // setRecommendServiceItems(allItems);
+      } catch (error) {
+        console.error('Error fetching recommendation service items:', error);
+      }
+    };
+    getRecommendationServiceItems();
+  }
+  ), [recommendServiceItems];
+
+  // const handleLoadMore = () => {
+  //   setVisibleItemsCount(prevCount => prevCount + itemsPerPage);
+  // };
+
+  return (
+    <Container>
+      {
+        recommendServiceItems.map((item, index) => {
+          return (
+            <RecommendService
+              key={index}
+              title={item.title}
+              description={item.description}
+              image={item.image}
+              link={item.link}
+            />
+          );
+        })
+      }
+    </Container>
+  );
+};
+
 
 export default HomePage;
