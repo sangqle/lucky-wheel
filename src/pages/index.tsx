@@ -22,28 +22,21 @@ const Content = styled.div`
 const HomePage: React.FunctionComponent = () => {
 
   const [recommendServiceItems, setRecommendServiceItems] = useState<RecommendationItem[]>([]);
-  // const [visibleItemsCount, setVisibleItemsCount] = useState<number>(5); // Display 5 items initially
-  // const itemsPerPage = 5;
 
+  const getRecommendationServiceItems = async () => {
+    try {
+      const response = await RecommendationService.getRecommendations();
+      const allItems = response.data;
+      console.log('Recommendation service items:', allItems);
+      setRecommendServiceItems(allItems);
+    } catch (error) {
+      console.error('Error fetching recommendation service items:', error);
+    }
+  };
 
   useEffect(() => {
-    const getRecommendationServiceItems = async () => {
-      try {
-        const response = await RecommendationService.getRecommendations();
-        const allItems = response.data;
-        console.log('Recommendation service items:', allItems);
-        // setRecommendServiceItems(allItems);
-      } catch (error) {
-        console.error('Error fetching recommendation service items:', error);
-      }
-    };
     getRecommendationServiceItems();
-  }
-  ), [recommendServiceItems];
-
-  // const handleLoadMore = () => {
-  //   setVisibleItemsCount(prevCount => prevCount + itemsPerPage);
-  // };
+  }, []);
 
   return (
     <Container>
@@ -63,6 +56,5 @@ const HomePage: React.FunctionComponent = () => {
     </Container>
   );
 };
-
 
 export default HomePage;
