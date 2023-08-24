@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import RecommendService from '@/components/recommend-service';
 import RecommendationService from '@/state/redcommend-service';
 import { RecommendationItem } from '@/types/recommend-service-item';
-import { Box, Button, Text } from 'zmp-ui';
+import SwiperQuote from '@/components/swiper-quote';
+import { Box } from 'zmp-ui';
 
 
 const Container = styled.div`
@@ -19,22 +20,22 @@ const Content = styled.div`
 
 const HomePage: React.FunctionComponent = () => {
 
-  const [recommendServiceItems, setRecommendServiceItems] = useState<RecommendationItem[]>([]);
+  const [recommendServiceItems, setRecommendServiceItems] = useState<RecommendationItem[]>(RecommendationService.getRecommendations().data);
 
-  const getRecommendationServiceItems = async () => {
-    try {
-      const response = await RecommendationService.getRecommendations();
-      const allItems = response.data;
-      console.log('Recommendation service items:', allItems);
-      setRecommendServiceItems(allItems);
-    } catch (error) {
-      console.error('Error fetching recommendation service items:', error);
-    }
-  };
+  // const getRecommendationServiceItems = async () => {
+  //   try {
+  //     const response = await RecommendationService.getRecommendations();
+  //     const allItems = response.data;
+  //     console.log('Recommendation service items:', allItems);
+  //     setRecommendServiceItems(allItems);
+  //   } catch (error) {
+  //     console.error('Error fetching recommendation service items:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getRecommendationServiceItems();
-  }, []);
+  // useEffect(() => {
+  //   getRecommendationServiceItems();
+  // }, []);
 
   return (
     <Container>
@@ -79,6 +80,7 @@ const HomePage: React.FunctionComponent = () => {
           );
         })
       }
+      <SwiperQuote />
     </Container >
   );
 };

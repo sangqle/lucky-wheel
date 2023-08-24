@@ -4,7 +4,7 @@ import { Text } from 'zmp-ui';
 
 const Container = styled.div`
     padding: 20px;
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#FAFBFE',
     borderRadius: '10px',
     border-bottom: 1px solid #e5e5e5;
 `;
@@ -19,7 +19,7 @@ const TextTime = styled.div`
 `;
 
 const TextDescription = styled.div`
-    margin-top: 5px;
+    margin-top: 8px;
 `;
 
 const RecommnedService = ({ title, description, image, time }) => {
@@ -27,7 +27,8 @@ const RecommnedService = ({ title, description, image, time }) => {
     return (
         <Container>
             <img src={image} alt={title} style={{
-                marginBottom: '10px', borderRadius: '5px'
+                marginBottom: '10px', borderRadius: '5px',
+                minHeight: '250px',
             }} />
             <TextContainer>
                 <Text.Title>{title}</Text.Title>

@@ -1,7 +1,7 @@
 import { RecommendationItem } from "@/types/recommend-service-item";
 
 const RecommendationService = {
-    getRecommendations: async (): Promise<{ data: RecommendationItem[]; }> => {
+    getRecommendations: () => {
         const mockData: RecommendationItem[] = [
             {
                 id: 1,
