@@ -28,30 +28,19 @@ export const ProfilePage: React.FunctionComponent = () => {
     return (
       <Box className="m-4">
         <ListRenderer
-          title="Cá nhân"
+          title="Thông tin liên hệ"
           items={[
             {
-              left: <Icon icon="zi-user" />,
+              left: <Icon icon="zi-chat" />,
               right: (
                 <Box flex>
                   <Text.Header className="flex-1 items-center font-normal">
-                    Thông tin tài khoản
+                    Chat với bộ phận tư vấn
                   </Text.Header>
                   <Icon icon="zi-chevron-right" />
                 </Box>
               ),
-            },
-            {
-              left: <Icon icon="zi-clock-2" />,
-              right: (
-                <Box flex>
-                  <Text.Header className="flex-1 items-center font-normal">
-                    Lịch sử đơn hàng
-                  </Text.Header>
-                  <Icon icon="zi-chevron-right" />
-                </Box>
-              ),
-            },
+            }
           ]}
           renderLeft={(item) => item.left}
           renderRight={(item) => item.right}
@@ -119,9 +108,7 @@ export const ProfilePage: React.FunctionComponent = () => {
 
   return (
     <Page>
-      <Subscription />
       <Personal />
-      <Other />
     </Page>
   );
 };

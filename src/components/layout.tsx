@@ -25,7 +25,6 @@ export const Layout = () => {
       <Flex1Container>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
-          <Route path="/notification" element={<NotificationPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
         </Routes>
       </Flex1Container>
