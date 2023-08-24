@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RecommendService from '@/components/recommend-service';
 import RecommendationService from '@/state/redcommend-service';
 import { RecommendationItem } from '@/types/recommend-service-item';
-import { Button } from 'zmp-ui';
+import { Box, Button, Text } from 'zmp-ui';
 
 
 const Container = styled.div`
@@ -38,6 +38,34 @@ const HomePage: React.FunctionComponent = () => {
 
   return (
     <Container>
+      <Box m={4}>
+        <h2
+          style={{
+            textAlign: 'center',
+            fontSize: '30px',
+          }}
+        >
+          Dexeta cung cấp dịch vụ thi công decal trên mọi phương tiện
+        </h2>
+      </Box>
+      <Box m={4}>
+        <p
+          style={{
+            textAlign: 'center',
+            fontSize: '20px',
+          }}
+        >
+          Với 3 năm kinh nghiệm thi công, chúng tôi tự tin mang đến cho bạn những mẫu decal quảng cáo đẹp nhất với chi phí tiết kiệm nhất.
+        </p>
+      </Box>
+      <Box>
+        <h2
+          style={{
+            textAlign: 'center',
+            fontSize: '30px',
+          }}
+        >Danh sách dịch vụ</h2>
+      </Box>
       {
         recommendServiceItems.map((item, index) => {
           return (
@@ -51,7 +79,7 @@ const HomePage: React.FunctionComponent = () => {
           );
         })
       }
-    </Container>
+    </Container >
   );
 };
 
