@@ -9,7 +9,7 @@ type HeaderProps = {
 };
 
 const StyledHeader = styled.div`
-  background-color: #ff9500;
+    background: linear-gradient(90deg, #12aee2 0%, #66d68f 100%);
 `;
 
 const LogoContainer = styled.div`
@@ -32,10 +32,6 @@ const HeaderTitle = styled(Text.Title)`
 `;
 
 const HeaderContainer = styled.div`
-  display: grid;
-	width: 100%;
-  grid-template-columns: 10% 80% 10%;
-	align-items: center;
 `;
 
 export function Header(props: HeaderProps) {
@@ -43,16 +39,7 @@ export function Header(props: HeaderProps) {
 	return (
 		<StyledHeader className="zaui-header">
 			<HeaderContainer>
-				<HomeButton>
-					<img
-						src="/static/icons8-home-32.png"
-						alt="back-button"
-						style={{ width: '25px', height: '25px', marginLeft: '10px' }}
-					/>
-				</HomeButton>
-				<LogoContainer>
-					<img src="/static/dexeta.png" alt="logo" style={{ height: '30px' }} />
-				</LogoContainer>
+				<Text.Title className="text-white">{title}</Text.Title>
 			</HeaderContainer>
 		</StyledHeader>
 	);
